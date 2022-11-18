@@ -68,21 +68,15 @@ const usuariosPatch = (req, res = response) => {
 
 const usuariosDelete = async (req, res = response) => {
     const { id } = req.params;
-
-    //eliminacion fisica (no se recomienda ya que la bd no queda integra en caso de que el usuario haya realizado acciones sobre otras tablas)
-    // const usuario = await Usuario.findByIdAndDelete(id);
+    const uid = req.uid;
 
     //eliminacion logica
     const usuario = await Usuario.findByIdAndUpdate(id, {estado: false});
-
 
     res.json({
         usuario
     });
 }
-
-
-
 
 module.exports = {
     usuariosGet,
